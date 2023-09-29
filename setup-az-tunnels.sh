@@ -23,19 +23,18 @@ function updateDns()
     echo DNS update complete!
 }
 
-read -p $'\e[7mWould you like to reconfigure DNS and resolv[y/n]? \e[0m' userInput
-echo $userInput
-
-if [[ -z "$userInput" ]]; then
-   printf '%s\n' "No input entered"
-   exit 1
-fi
 while [ "$done" != "true" ]
 do
+    read -p $'\e[7mWould you like to reconfigure DNS and resolv[y/n]? \e[0m' userInput
+
+    if [[ -z "$userInput" ]]; then
+        printf '%s\n' "No input entered"
+        exit 1
+    fi
     case $userInput in
         [Yy]* ) updateDns;break;;
         [Nn]* ) done="true";;
-        * ) echo "Please answer yes or no.";;
+        * ) echo "Please answer y or n";;
     esac
 done
 
@@ -81,20 +80,19 @@ function updateCerts()
 }
 
 done="false"
-read -p $'\e[7mWould you like to update your certificates[y/n]? \e[0m' userInput
-echo $userInput
-
-if [[ -z "$userInput" ]]; then
-   printf '%s\n' "No input entered"
-   exit 1
-fi
 
 while [ "$done" != "true" ]
 do
+    read -p $'\e[7mWould you like to update your certificates[y/n]? \e[0m' userInput
+
+    if [[ -z "$userInput" ]]; then
+        printf '%s\n' "No input entered"
+        exit 1
+    fi
     case $userInput in
         [Yy]* ) updateCerts;break;;
         [Nn]* ) done="true";;
-        * ) echo "Please answer yes or no.";;
+        * ) echo "Please answer y or n";;
     esac
 done
 
@@ -107,20 +105,18 @@ function upgradeUbuntu()
 }
 
 done="false"
-read -p $'\e[7mWould you like to upgrade Ubuntu[y/n]? \e[0m' userInput
-echo $userInput
-
-if [[ -z "$userInput" ]]; then
-   printf '%s\n' "No input entered"
-   exit 1
-fi
-
 while [ "$done" != "true" ]
 do
+    read -p $'\e[7mWould you like to upgrade Ubuntu[y/n]? \e[0m' userInput
+
+    if [[ -z "$userInput" ]]; then
+        printf '%s\n' "No input entered"
+        exit 1
+    fi
     case $userInput in
         [Yy]* ) upgradeUbuntu; break;;
         [Nn]* ) done="true";;
-        * ) echo "Please answer yes or no.";;
+        * ) echo "Please answer y or n";;
     esac
 done
 
@@ -137,20 +133,19 @@ function installTerraform()
 
 
 done="false"
-read -p $'\e[7mWould you like to install terraform[y/n]? \e[0m' userInput
-echo $userInput
-
-if [[ -z "$userInput" ]]; then
-   printf '%s\n' "No input entered"
-   exit 1
-fi
-
 while [ "$done" != "true" ]
 do
+    read -p $'\e[7mWould you like to install terraform[y/n]? \e[0m' userInput
+
+    if [[ -z "$userInput" ]]; then
+        printf '%s\n' "No input entered"
+        exit 1
+    fi
+
     case $userInput in
         [Yy]* ) installTerraform; break;;
         [Nn]* ) done="true";;
-        * ) echo "Please answer yes or no.";;
+        * ) echo "Please answer y or n";;
     esac
 done
 
@@ -169,20 +164,19 @@ function installBrew
 }
 
 done="false"
-read -p $'\e[7mWould you like to install Brew[y/n]? \e[0m' userInput
-echo $userInput
-
-if [[ -z "$userInput" ]]; then
-   printf '%s\n' "No input entered"
-   exit 1
-fi
-
 while [ "$done" != "true" ]
 do
+read -p $'\e[7mWould you like to install Brew[y/n]? \e[0m' userInput
+
+    if [[ -z "$userInput" ]]; then
+        printf '%s\n' "No input entered"
+        exit 1
+    fi
+
     case $userInput in
         [Yy]* ) installBrew; break;;
         [Nn]* ) done="true";;
-        * ) echo "Please answer yes or no.";;
+        * ) echo "Please answer y or n";;
     esac
 done
 
@@ -193,20 +187,19 @@ function installTerragrunt
 }
 
 done="false"
-read -p $'\e[7mWould you like to install terragrunt[y/n]? \e[0m' userInput
-echo $userInput
-
-if [[ -z "$userInput" ]]; then
-   printf '%s\n' "No input entered"
-   exit 1
-fi
-
 while [ "$done" != "true" ]
 do
+    read -p $'\e[7mWould you like to install terragrunt[y/n]? \e[0m' userInput
+
+    if [[ -z "$userInput" ]]; then
+        printf '%s\n' "No input entered"
+        exit 1
+    fi
+
     case $userInput in
         [Yy]* ) installTerragrunt; break;;
         [Nn]* ) done="true";;
-        * ) echo "Please answer yes or no.";;
+        * ) echo "Please answer y or n";;
     esac
 done
 
@@ -217,20 +210,19 @@ function installAzureCli()
 }
 
 done="false"
-read -p $'\e[7mWould you like to install AzureCli[y/n]? \e[0m' userInput
-echo $userInput
-
-if [[ -z "$userInput" ]]; then
-   printf '%s\n' "No input entered"
-   exit 1
-fi
-
 while [ "$done" != "true" ]
 do
+    read -p $'\e[7mWould you like to install AzureCli[y/n]? \e[0m' userInput
+
+    if [[ -z "$userInput" ]]; then
+        printf '%s\n' "No input entered"
+        exit 1
+    fi
+
     case $userInput in
         [Yy]* ) installAzureCli; break;;
         [Nn]* ) done="true";;
-        * ) echo "Please answer yes or no.";;
+        * ) echo "Please answer y or n";;
     esac
 done
 
