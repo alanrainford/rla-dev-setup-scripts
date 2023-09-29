@@ -3,7 +3,7 @@
 userName=$(whoami)
 echo "Hello $userName"
 if [[ "$userName" == "root" ]]; then    
-    echo 'Dont run this script as root!'
+    echo -e '\e[7mDont run this script as root!'
     exit 
 fi    
 
@@ -23,7 +23,7 @@ function updateDns()
     echo DNS update complete!
 }
 
-read -p "Would you like to reconfigure DNS and resolv? " userInput
+read -p $'\e[7mWould you like to reconfigure DNS and resolv[y/n]? \e[0m' userInput
 echo $userInput
 
 if [[ -z "$userInput" ]]; then
@@ -33,7 +33,7 @@ fi
 while [ "$done" != "true" ]
 do
     case $userInput in
-        [Yy]* ) echo Yes; updateDns; break;;
+        [Yy]* ) updateDns;break;;
         [Nn]* ) done="true";;
         * ) echo "Please answer yes or no.";;
     esac
@@ -47,19 +47,14 @@ function updateCerts()
     if [ ! -d "$DIRECTORY" ]; then
         mkdir ~/tmp        
     fi    
-    
-    echo "Retrieve Zscaler cert from Wiki"
-    SITE=wiki.gtech.com
-    openssl s_client -showcerts -verify 5 -connect $SITE:443 < /dev/null |  awk '/BEGIN CERTIFICATE/,/END CERTIFICATE/{ if(/BEGIN CERTIFICATE/){a++}; out="cert"a".pem"; print >out}'
-    echo "found certs"
-    ls *.pem
-    sudo cp cert3.pem /usr/local/share/ca-certificates/$SITE.crt
-    rm *.pem
-    echo "here are your certs"
-    echo "Do we need to detect if Zscaler is in play here?"
-    ls /usr/local/share/ca-certificates/
 
-    echo "Retrieve public cert from brew.sh"
+    #echo "Do we need to detect if Zscaler is in play here?"
+    zScalerTest = openssl s_client -showcerts -verify 5 -connect brew.sh:443 < /dev/null 2> /dev/null| grep -i "O = Zscaler Inc."
+    if [[ "$zScaler" == "" ]]; then 
+        echo Error: It looks like your not connected to the VPN
+        exit
+    fi
+    echo "Retrieve Zscaler cert from brew.sh"
     SITE=brew.sh
     openssl s_client -showcerts -verify 5 -connect $SITE:443 < /dev/null |  awk '/BEGIN CERTIFICATE/,/END CERTIFICATE/{ if(/BEGIN CERTIFICATE/){a++}; out="cert"a".pem"; print >out}'
     echo "found certs"
@@ -67,7 +62,18 @@ function updateCerts()
     sudo cp cert3.pem /usr/local/share/ca-certificates/$SITE.crt
     rm *.pem
     echo "here are your certs"
+    #ls /usr/local/share/ca-certificates/
+
+    echo "Retrieve private cert from Wiki"
+    SITE=wiki.gtech.com
+    openssl s_client -showcerts -verify 5 -connect $SITE:443 < /dev/null |  awk '/BEGIN CERTIFICATE/,/END CERTIFICATE/{ if(/BEGIN CERTIFICATE/){a++}; out="cert"a".pem"; print >out}'
+    echo "found certs"
+    ls *.pem
+    sudo cp cert3.pem /usr/local/share/ca-certificates/$SITE.crt
+    rm *.pem
+    echo "here are your certs"
     ls /usr/local/share/ca-certificates/
+
     sudo update-ca-certificates
 
     export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
@@ -75,7 +81,7 @@ function updateCerts()
 }
 
 done="false"
-read -p "Would you like to update your certificates? " userInput
+read -p $'\e[7mWould you like to update your certificates[y/n]? \e[0m' userInput
 echo $userInput
 
 if [[ -z "$userInput" ]]; then
@@ -86,7 +92,7 @@ fi
 while [ "$done" != "true" ]
 do
     case $userInput in
-        [Yy]* ) echo "yes";updateCerts; break;;
+        [Yy]* ) updateCerts;break;;
         [Nn]* ) done="true";;
         * ) echo "Please answer yes or no.";;
     esac
@@ -101,7 +107,7 @@ function upgradeUbuntu()
 }
 
 done="false"
-read -p "Would you like to upgrade Ubuntu? " userInput
+read -p $'\e[7mWould you like to upgrade Ubuntu[y/n]? \e[0m' userInput
 echo $userInput
 
 if [[ -z "$userInput" ]]; then
@@ -112,7 +118,7 @@ fi
 while [ "$done" != "true" ]
 do
     case $userInput in
-        [Yy]* ) echo "yes";upgradeUbuntu; break;;
+        [Yy]* ) upgradeUbuntu; break;;
         [Nn]* ) done="true";;
         * ) echo "Please answer yes or no.";;
     esac
@@ -131,7 +137,7 @@ function installTerraform()
 
 
 done="false"
-read -p "Would you like to install terraform? " userInput
+read -p $'\e[7mWould you like to install terraform[y/n]? \e[0m' userInput
 echo $userInput
 
 if [[ -z "$userInput" ]]; then
@@ -142,7 +148,7 @@ fi
 while [ "$done" != "true" ]
 do
     case $userInput in
-        [Yy]* ) echo "yes";installTerraform; break;;
+        [Yy]* ) installTerraform; break;;
         [Nn]* ) done="true";;
         * ) echo "Please answer yes or no.";;
     esac
@@ -163,7 +169,7 @@ function installBrew
 }
 
 done="false"
-read -p "Would you like to install Brew? " userInput
+read -p $'\e[7mWould you like to install Brew[y/n]? \e[0m' userInput
 echo $userInput
 
 if [[ -z "$userInput" ]]; then
@@ -174,7 +180,7 @@ fi
 while [ "$done" != "true" ]
 do
     case $userInput in
-        [Yy]* ) echo "yes";installBrew; break;;
+        [Yy]* ) installBrew; break;;
         [Nn]* ) done="true";;
         * ) echo "Please answer yes or no.";;
     esac
@@ -187,7 +193,7 @@ function installTerragrunt
 }
 
 done="false"
-read -p "Would you like to install terragrunt? " userInput
+read -p $'\e[7mWould you like to install terragrunt[y/n]? \e[0m' userInput
 echo $userInput
 
 if [[ -z "$userInput" ]]; then
@@ -198,7 +204,7 @@ fi
 while [ "$done" != "true" ]
 do
     case $userInput in
-        [Yy]* ) echo "yes";installTerragrunt; break;;
+        [Yy]* ) installTerragrunt; break;;
         [Nn]* ) done="true";;
         * ) echo "Please answer yes or no.";;
     esac
@@ -211,7 +217,7 @@ function installAzureCli()
 }
 
 done="false"
-read -p "Would you like to install AzureCli? " userInput
+read -p $'\e[7mWould you like to install AzureCli[y/n]? \e[0m' userInput
 echo $userInput
 
 if [[ -z "$userInput" ]]; then
@@ -222,7 +228,7 @@ fi
 while [ "$done" != "true" ]
 do
     case $userInput in
-        [Yy]* ) echo "yes";installAzureCli; break;;
+        [Yy]* ) installAzureCli; break;;
         [Nn]* ) done="true";;
         * ) echo "Please answer yes or no.";;
     esac
