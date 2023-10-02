@@ -227,4 +227,36 @@ do
 done
 
 #################################################################################
+
+function installChrome()
+{
+    DIRECTORY=~/tmp
+
+    if [ ! -d "$DIRECTORY" ]; then
+        mkdir ~/tmp
+    fi
+
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    sudo dpkg -i google-chrome-stable_current_amd64.deb
+    sudo apt install --fix-broken -y
+    sudo dpkg -i google-chrome-stable_current_amd64.deb}
+
+done="false"
+while [ "$done" != "true" ]
+do
+    read -p $'\e[7mWould you like to install Chrome for Linux[y/n]? \e[0m' userInput
+
+    if [[ -z "$userInput" ]]; then
+        printf '%s\n' "No input entered"
+        exit 1
+    fi
+
+    case $userInput in
+        [Yy]* ) installChrome; break;;
+        [Nn]* ) done="true";;
+        * ) echo "Please answer y or n";;
+    esac
+done
+
+#################################################################################
 echo "All done!"
