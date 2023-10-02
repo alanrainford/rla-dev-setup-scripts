@@ -260,4 +260,34 @@ do
 done
 
 #################################################################################
+
+function installDBeaver()
+{
+    sudo apt update
+    sudo apt -y install default-jdk
+    java -version
+    curl -fsSL https://dbeaver.io/debs/dbeaver.gpg.key | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/dbeaver.gpg
+    echo "deb https://dbeaver.io/debs/dbeaver-ce /" | sudo tee /etc/apt/sources.list.d/dbeaver.list
+    sudo apt update && sudo apt install dbeaver-ce
+    apt policy dbeaver-ce
+}
+
+done="false"
+while [ "$done" != "true" ]
+do
+    read -p $'\e[7mWould you like to install DBeaver[y/n]? \e[0m' userInput
+
+    if [[ -z "$userInput" ]]; then
+        printf '%s\n' "No input entered"
+        exit 1
+    fi
+
+    case $userInput in
+        [Yy]* ) installDBeaver; break;;
+        [Nn]* ) done="true";;
+        * ) echo "Please answer y or n";;
+    esac
+done
+
+#################################################################################
 echo "All done!"
