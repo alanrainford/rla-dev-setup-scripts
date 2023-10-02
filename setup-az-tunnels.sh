@@ -325,4 +325,29 @@ done
 
 
 #################################################################################
+
+function installIntellij()
+{
+    sudo snap install intellij-idea-ultimate --classic
+}
+
+done="false"
+while [ "$done" != "true" ]
+do
+    read -p $'\e[7mWould you like to install IntelliJ[y/n]? \e[0m' userInput
+
+    if [[ -z "$userInput" ]]; then
+        printf '%s\n' "No input entered"
+        exit 1
+    fi
+
+    case $userInput in
+        [Yy]* ) installIntellij; break;;
+        [Nn]* ) done="true";;
+        * ) echo "Please answer y or n";;
+    esac
+done
+
+
+#################################################################################
 echo "All done!"
