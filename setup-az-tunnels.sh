@@ -14,6 +14,8 @@ function updateDns()
     sudo mv /etc/wsl.conf /etc/wsl.conf."$(date +"%m-%d-%y")"
     sudo mv /etc/resolv.conf /etc/resolv.conf."$(date +"%m-%d-%y")"
 
+    echo "[boot]" | sudo tee -a /etc/wsl.conf
+    echo "systemd=true" | sudo tee -a /etc/wsl.conf
     echo "[network]" | sudo tee -a /etc/wsl.conf
     echo "generateResolvConf=false" | sudo tee -a /etc/wsl.conf
 
