@@ -50,7 +50,7 @@ function updateCerts()
     fi    
 
     #echo "Do we need to detect if Zscaler is in play here?"
-    zScalerTest = openssl s_client -showcerts -verify 5 -connect brew.sh:443 < /dev/null 2> /dev/null| grep -i "O = Zscaler Inc."
+    zScalerTest=$(openssl s_client -showcerts -verify 5 -connect brew.sh:443 < /dev/null 2> /dev/null| grep -i "O = Zscaler Inc.")
     if [[ "$zScalerTest" == "" ]]; then 
         echo -e "\e[4mError: It looks like your not connected to the VPN or not using Zscaler.  Either way you should have skipped this step.\e[0m"
         return
