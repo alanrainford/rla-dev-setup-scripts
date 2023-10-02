@@ -328,6 +328,7 @@ done
 
 function installIntellij()
 {
+    sudo systemctl restart snapd
     sudo snap install intellij-idea-ultimate --classic
 }
 
