@@ -12,7 +12,6 @@ function question() {
     while [ "$done" != "true" ]
     do
         read -p "$(echo -e $REVERSE $1  [y/n]? $RESET)" userInput
-        #read -p $"\e[7m$1 [y/n]?\e[0m" userInput
 
         if [[ -z "$userInput" ]]; then
             printf '%s\n' "No input entered"
