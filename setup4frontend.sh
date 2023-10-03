@@ -27,6 +27,12 @@ function question() {
     done="false"
 }
 
+userName=$(whoami)
+echo "Hello $userName"
+if [[ "$userName" == "root" ]]; then    
+    echo -e '\e[7mDont run this script as root!'
+    exit 
+fi    
 
 #################################################################################
 echo "TODO: add frontend apps here!!"

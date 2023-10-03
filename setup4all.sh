@@ -26,6 +26,7 @@ function question() {
     done
     done="false"
 }
+
 userName=$(whoami)
 echo "Hello $userName"
 if [[ "$userName" == "root" ]]; then    
