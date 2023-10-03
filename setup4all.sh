@@ -189,3 +189,4 @@ function installVSCode()
 question "Would you like to install VSCode" "installVSCode"
 
 #################################################################################
+echo "All done!"

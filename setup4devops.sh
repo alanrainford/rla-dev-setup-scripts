@@ -63,3 +63,4 @@ function installAzureCli()
 question "Would you like to install AzureCli" "installAzureCli"
 
 #################################################################################
+echo "All done!"
