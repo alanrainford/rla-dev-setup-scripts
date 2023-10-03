@@ -42,7 +42,7 @@ function setupSSH()
 
 DIRECTORY=~/.ssh
 winHome=$(wslpath "$(wslvar USERPROFILE)")
-echo "You should have a ssh key configured in GitHub.... If not then do it now!!!!!"
+echo "You should have a ssh key configured in https://github.com/settings/keys .... If not then do it now!!!!!"
 if [ ! -d "$DIRECTORY" ]; then
     echo "I can use the same SSH public keys from Windows home directory" $winHome/.ssh
     question "Shall I use the windows ssh keys" "setupSSH"
