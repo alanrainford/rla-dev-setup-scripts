@@ -186,7 +186,8 @@ function installVSCode()
 
 }
 
-question "Would you like to install VSCode" "installVSCode"
+# Not needed if you install VSCode in Windows.
+#question "Would you like to install VSCode" "installVSCode"
 
 #################################################################################
 echo "All done!"
