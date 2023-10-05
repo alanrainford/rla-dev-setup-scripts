@@ -71,6 +71,7 @@ function updateDns()
 
     echo "nameserver 156.24.14.42" | sudo tee -a /etc/resolv.conf
     echo "nameserver 8.8.8.8" | sudo tee -a /etc/resolv.conf
+    echo "search gtk.gtech.com" | sudo tee -a /etc/resolv.conf
 
     echo DNS update complete!
 }
