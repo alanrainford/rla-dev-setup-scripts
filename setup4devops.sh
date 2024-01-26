@@ -47,12 +47,27 @@ function installTerraform()
 
 question "Would you like to install terraform" "installTerraForm"
 
+#################################################################################
+function installBrew
+{
+    sudo apt-get install -y build-essential procps curl file git
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+    test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    test -r ~/.bash_profile && echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bash_profile
+    echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.profile
+    . ~/.profile
+}
+
+question "Would you like to install Brew" "installBrew"
+
+#################################################################################
 function installTerragrunt
 {
     sudo -u $userName /home/linuxbrew/.linuxbrew/bin/brew install terragrunt
 }
 
-question "Would you like to install terragrunt" "installTerragrunt"
+question "Would you like to brew install terragrunt" "installTerragrunt"
 
 #################################################################################
 function installAzureCli()
