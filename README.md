@@ -8,7 +8,7 @@ Out of the box WSL has some odd network setup. If you cannot `ping github.com` y
 
 `exit`
 
-`/bin/bash -c "$(curl -fsSL https://github.com/alanrainford/rla-dev-setup-scripts/raw/develop/setup4all.sh)"`
+`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/alanrainford/scripts/develop/setup4all.sh)"`
 
 | Script      | Description |
 | ----------- | ----------- |
